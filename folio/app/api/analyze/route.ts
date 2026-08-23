@@ -8,7 +8,7 @@ import { Transaction, AnalyzeResponse } from "@/lib/types";
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const period: string = body.period ?? "2026-08";
-  const apiKey: string | undefined = body.apiKey;
+  const apiKey: string | undefined = body.apiKey || process.env.GROQ_API_KEY;
 
   // 1. Ingest
   const raw = generatePeriod(period);
